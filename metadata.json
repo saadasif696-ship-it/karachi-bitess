@@ -1,0 +1,6 @@
+{
+  "name": "Karachi Bites",
+  "description": "Imperial Ephemeral culinary atelier curating heirloom Pakistani and Mughal gastronomy across Clifton, DHA Phase 6, and Tariq Road.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

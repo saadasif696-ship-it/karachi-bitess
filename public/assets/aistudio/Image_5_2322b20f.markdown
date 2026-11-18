@@ -1,0 +1,175 @@
+---
+name: Karachi Bites - Imperial Ephemeral
+colors:
+  surface: '#131313'
+  surface-dim: '#131313'
+  surface-bright: '#3a3939'
+  surface-container-lowest: '#0e0e0e'
+  surface-container-low: '#1c1b1b'
+  surface-container: '#201f1f'
+  surface-container-high: '#2a2a2a'
+  surface-container-highest: '#353534'
+  on-surface: '#e5e2e1'
+  on-surface-variant: '#d0c5af'
+  inverse-surface: '#e5e2e1'
+  inverse-on-surface: '#313030'
+  outline: '#99907c'
+  outline-variant: '#4d4635'
+  surface-tint: '#e9c349'
+  primary: '#f2ca50'
+  on-primary: '#3c2f00'
+  primary-container: '#d4af37'
+  on-primary-container: '#554300'
+  inverse-primary: '#735c00'
+  secondary: '#d4c78f'
+  on-secondary: '#383006'
+  secondary-container: '#4f471b'
+  on-secondary-container: '#c2b57f'
+  tertiary: '#fdc659'
+  on-tertiary: '#412d00'
+  tertiary-container: '#deaa41'
+  on-tertiary-container: '#5b4000'
+  error: '#ffb4ab'
+  on-error: '#690005'
+  error-container: '#93000a'
+  on-error-container: '#ffdad6'
+  primary-fixed: '#ffe088'
+  primary-fixed-dim: '#e9c349'
+  on-primary-fixed: '#241a00'
+  on-primary-fixed-variant: '#574500'
+  secondary-fixed: '#f1e3a9'
+  secondary-fixed-dim: '#d4c78f'
+  on-secondary-fixed: '#211b00'
+  on-secondary-fixed-variant: '#4f471b'
+  tertiary-fixed: '#ffdea6'
+  tertiary-fixed-dim: '#f4be53'
+  on-tertiary-fixed: '#271900'
+  on-tertiary-fixed-variant: '#5e4200'
+  background: '#131313'
+  on-background: '#e5e2e1'
+  surface-variant: '#353534'
+typography:
+  display-lg:
+    fontFamily: Playfair Display
+    fontSize: 56px
+    fontWeight: '600'
+    lineHeight: 68px
+    letterSpacing: -0.02em
+  display-md:
+    fontFamily: Playfair Display
+    fontSize: 44px
+    fontWeight: '600'
+    lineHeight: 54px
+    letterSpacing: -0.01em
+  headline-lg:
+    fontFamily: Playfair Display
+    fontSize: 32px
+    fontWeight: '500'
+    lineHeight: 40px
+    letterSpacing: 0em
+  headline-sm:
+    fontFamily: Playfair Display
+    fontSize: 22px
+    fontWeight: '500'
+    lineHeight: 28px
+    letterSpacing: 0.01em
+  title-md:
+    fontFamily: Montserrat
+    fontSize: 16px
+    fontWeight: '600'
+    lineHeight: 24px
+    letterSpacing: 0.08em
+  body-lg:
+    fontFamily: Plus Jakarta Sans
+    fontSize: 18px
+    fontWeight: '400'
+    lineHeight: 28px
+    letterSpacing: 0.01em
+  body-md:
+    fontFamily: Plus Jakarta Sans
+    fontSize: 15px
+    fontWeight: '400'
+    lineHeight: 24px
+    letterSpacing: 0em
+  label-md:
+    fontFamily: Montserrat
+    fontSize: 12px
+    fontWeight: '600'
+    lineHeight: 16px
+    letterSpacing: 0.12em
+  caption:
+    fontFamily: Plus Jakarta Sans
+    fontSize: 12px
+    fontWeight: '400'
+    lineHeight: 18px
+    letterSpacing: 0.02em
+rounded:
+  sm: 0.125rem
+  DEFAULT: 0.25rem
+  md: 0.375rem
+  lg: 0.5rem
+  xl: 0.75rem
+  full: 9999px
+spacing:
+  gutter: 1.5rem
+  margin: 4rem
+  space-xs: 0.25rem
+  space-sm: 0.5rem
+  space-md: 1rem
+  space-lg: 2rem
+  space-xl: 3.5rem
+---
+
+## Brand & Style
+This design system curates an ultra-luxury culinary atelier experience for an elite clientele frequenting Karachi’s high-fashion enclaves (Clifton, DHA Phase 6). It fuses grand Mughal palatial cues with sharp, contemporary architectural minimalism. The emotional tone evokes absolute exclusivity, heirloom craftsmanship, and sensory indulgence.
+
+The visual style employs an Obsidian Noir and Metallic Gold aesthetic: deep void-like backdrops, illuminated metallic accents, micro-textured translucent containers, and razor-sharp typographic discipline. Visual artifacts avoid loud or vernacular kitsch, relying instead on restraint, calibrated gold leaf highlights, and generous negative space to evoke timeless gastronomic prestige.
+
+## Colors
+The palette evokes liquid metallic gold suspended over deep midnight stone.
+
+- **Obsidian Black Canvas (`#0A0A0A`)**: Grounding base canvas that acts as an endless expanse, heightening contrast.
+- **Charcoal Elevated Surface (`#141414`)**: Used for structured cards, modal dialogue panels, and culinary feature framing.
+- **Royal Metallic Gold (`#D4AF37`)**: The principal anchor for primary calls to action, badges, and key icons. Linear gradients transition from Champagne Shimmer (`#F3E5AB`) at the apex down to Burnished Bronze (`#AA7C11`) at the base.
+- **Crisp Ivory (`#F8F5F0`)**: Primary typography baseline, providing pristine optical clarity against charcoal surfaces.
+- **Muted Champagne (`#A39E93`)**: Secondary metadata, ingredient provenance notes, nutritional cues, and unobtrusive borders.
+
+## Typography
+Typographic scale reflects formal dining protocol: measured, upright, and legibly expressive. 
+
+Headings rely on **Playfair Display**, using high-contrast serifs to mirror antique royal charters and engraved reservation ledgers. All uppercase usage for category descriptors and section indices shifts into **Montserrat** to ensure structural stability at small optical sizes with expanded tracking (`0.08em` to `0.12em`). Narrative descriptions, tasting notes, and interactive states render in **Plus Jakarta Sans** for crisp, effortless legibility under ambient low-light interfaces.
+
+## Layout & Spacing
+A fluid 12-column desktop framework anchored by generous margins (`4rem` outer screen gutters) ensures luxury breathing room. The layout avoids claustrophobic information density; white space acts as a design material rather than empty canvas.
+
+- **Desktop (1200px+)**: 12 columns with `1.5rem` gutters. Maximum content canvas bounded at `1440px`.
+- **Vertical Rhythm**: Micro spacings (`space-xs`, `space-sm`) structure ingredient pairings and culinary awards. Major editorial transitions utilize `space-xl` to enforce pauses between multi-course tasting menus, bespoke private dining suites, and cellar reserves.
+
+## Elevation & Depth
+Elevation is articulated through calibrated gold-light dispersion and tonal surface boundaries rather than murky drop shadows:
+
+- **Base Level (`#0A0A0A`)**: Ground canvas for broad section staging.
+- **Layer 1 Surface (`#141414`)**: Menu cards, reservation inputs, and carousel tiles framed with a razor-thin border (`1px solid rgba(212, 175, 55, 0.2)`).
+- **Layer 2 Floating / Flyout**: Navigation bars, drop-down concierges, and dish detail modals elevate via backdrop blur (`blur(16px)`) over an alpha-layered charcoal matrix (`rgba(20, 20, 20, 0.85)`), bordered with `1px solid rgba(243, 229, 171, 0.3)`.
+- **Glow Accents**: Focused CTAs and active states cast a diffuse, warm halo (`box-shadow: 0 8px 32px rgba(212, 175, 55, 0.15)`).
+
+## Shapes
+To preserve an aura of architectural nobility, geometries remain disciplined and tailored. All cards, interactive states, and dialogs follow a subtle, crisp soft radius (`0.25rem` / `4px`), ensuring cards retain an engraved, tactile precision. Circular formats are reserved strictly for avatar monograms and location locator indicators.
+
+## Components
+
+### Buttons
+- **Primary CTA (Imperial Gold)**: Gradient fill from `#F3E5AB` through `#D4AF37` to `#AA7C11` with dark charcoal text (`#0A0A0A`, Montserrat SemiBold, uppercase, tracked). Hover initiates an interior luminosity shift and soft halo glow (`box-shadow: 0 0 20px rgba(212, 175, 55, 0.3)`).
+- **Secondary CTA (Atelier Outline)**: Transparent background, `1px solid rgba(212, 175, 55, 0.5)` with Crisp Ivory text (`#F8F5F0`). Hover transitions border to solid gold with background fill of `rgba(212, 175, 55, 0.08)`.
+
+### Cards & Menu Folios
+Constructed over `#141414` charcoal slabs with a disciplined `1px solid rgba(212, 175, 55, 0.2)` border. On hover, the border subtly brightens to `rgba(243, 229, 171, 0.45)` with a slow, smooth transition (`400ms ease-out`). Dish imagery uses a subtle dark gradient vignette at the base to seamlessly merge with the card surface.
+
+### Chips & Badges (Dietary & Heritage)
+Compact, low-profile badges using Montserrat Label typography. Rendered in dark charcoal fills with subtle gold borders (`1px solid rgba(212, 175, 55, 0.3)`) and champagne text (`#F3E5AB`), denoting distinctions such as "Dum Pukht Classic", "Wagyu Nihari", or "Clifton Exclusive".
+
+### Form Controls & Date Selectors
+Minimalist underline or enclosed charcoal inputs with inset padding (`0.75rem 1rem`). Placeholder text rendered in Muted Champagne (`#A39E93`). Focus state swaps borders to solid Royal Metallic Gold with zero native browser outlines.
+
+### Specialized Component: Location Selector
+A refined segment controller toggling between flagship branches (Clifton, DHA Phase 6, Tariq Road). Active branch features an illuminated gold underline bar with high-contrast Ivory text, while inactive branches rest in Muted Champagne.

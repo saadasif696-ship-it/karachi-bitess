@@ -1,0 +1,94 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Playfair Display", Georgia, serif;
+  --font-sans: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+  --font-label: "Montserrat", system-ui, -apple-system, sans-serif;
+
+  --color-obsidian: #0a0a0a;
+  --color-charcoal: #141414;
+  --color-charcoal-elevated: #1c1b1b;
+  --color-gold: #d4af37;
+  --color-champagne-shimmer: #f3e5ab;
+  --color-burnished-bronze: #aa7c11;
+  --color-ivory: #f8f5f0;
+  --color-muted-champagne: #a39e93;
+}
+
+@layer base {
+  html {
+    background-color: #0a0a0a;
+    color: #f8f5f0;
+    font-family: var(--font-sans);
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  :focus-visible {
+    outline: 2px solid #d4af37;
+    outline-offset: 2px;
+  }
+}
+
+.font-display {
+  font-family: var(--font-serif);
+}
+
+.font-label {
+  font-family: var(--font-label);
+}
+
+.btn-imperial-gold {
+  background: linear-gradient(180deg, #f3e5ab 0%, #d4af37 52%, #aa7c11 100%);
+  color: #0a0a0a;
+  transition: transform 180ms cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 200ms cubic-bezier(0.16, 1, 0.3, 1),
+    filter 180ms ease-out;
+}
+
+.btn-imperial-gold:hover:not(:disabled) {
+  filter: brightness(1.06);
+  box-shadow: 0 0 24px rgba(212, 175, 55, 0.32);
+}
+
+.btn-imperial-gold:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.btn-atelier-outline {
+  background-color: transparent;
+  border: 1px solid rgba(212, 175, 55, 0.45);
+  color: #f8f5f0;
+  transition: background-color 180ms ease-out, border-color 180ms ease-out;
+}
+
+.btn-atelier-outline:hover:not(:disabled) {
+  border-color: #d4af37;
+  background-color: rgba(212, 175, 55, 0.08);
+}
+
+.folio-card {
+  background-color: #141414;
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  transition: border-color 400ms ease-out, transform 320ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.folio-card:hover {
+  border-color: rgba(243, 229, 171, 0.45);
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}

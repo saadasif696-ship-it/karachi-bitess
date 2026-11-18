@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Staff Portal — Karachi Bites Culinary Atelier</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Montserrat:wght@500;600&family=Playfair+Display:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/admin.css" />
+  </head>
+  <body>
+    <!-- =========================================================
+         1. SECURITY GATE: OBSIDIAN LOGIN SCREEN
+         ========================================================= -->
+    <main id="login-view" class="login-screen" aria-label="Staff Portal Authentication">
+      <section class="login-card">
+        <div class="login-brand">
+          <span class="label-tracked text-gold">Karachi Bites</span>
+          <h1 class="font-display login-title">Staff Portal</h1>
+          <p class="login-subtitle">
+            Authorized kitchen directors, maître d’s, and enclave managers only.
+          </p>
+        </div>
+
+        <form id="login-form" class="login-form" novalidate>
+          <div class="field-group">
+            <label for="master-password" class="label-tracked">Master Access Key</label>
+            <div class="password-input-wrap">
+              <input
+                id="master-password"
+                name="password"
+                type="password"
+                autocomplete="current-password"
+                placeholder="••••••••••••"
+                aria-describedby="login-error"
+                required
+              />
+              <button
+                type="button"
+                id="toggle-password"
+                class="toggle-visibility-btn"
+                aria-label="Show password"
+              >
+                Show
+              </button>
+            </div>
+          </div>
+
+          <p id="login-error" class="login-error" role="alert" aria-live="polite"></p>
+
+          <button type="submit" class="btn-imperial-gold w-full">
+            Enter Admin Hub
+          </button>
+        </form>
+
+        <div class="login-footer">
+          <a href="/" class="back-link">Return to Public Storefront</a>
+        </div>
+      </section>
+    </main>
+
+    <!-- =========================================================
+         2. MAIN ADMIN HUB DASHBOARD (REVEALED ON AUTHENTICATION)
+         ========================================================= -->
+    <div id="dashboard-view" class="dashboard-shell is-hidden" aria-hidden="true">
+      <!-- Left Sidebar Navigation -->
+      <aside class="sidebar" aria-label="Staff Portal Navigation">
+        <div class="sidebar-brand">
+          <span class="font-display sidebar-logo">Karachi Bites</span>
+          <span class="label-tracked text-muted">Staff Portal</span>
+        </div>
+
+        <nav class="sidebar-nav">
+          <button type="button" class="nav-item is-active" data-section="overview">
+            Operations Overview
+          </button>
+          <button type="button" class="nav-item" data-section="orders">
+            Active Orders
+            <span id="sidebar-pending-count" class="nav-count tabular-nums">0</span>
+          </button>
+          <button type="button" class="nav-item" data-section="inventory">
+            Menu Stock &amp; Pricing
+          </button>
+        </nav>
+
+        <div class="sidebar-footer">
+          <a href="/" class="sidebar-link">View Live Storefront</a>
+          <button type="button" id="logout-btn" class="btn-atelier-outline w-full">
+            Lock Portal
+          </button>
+        </div>
+      </aside>
+
+      <!-- Workspace Main Column -->
+      <div class="workspace-main">
+        <!-- Top Header Contract -->
+        <header class="topbar">
+          <div class="topbar-breadcrumb">
+            <span class="label-tracked text-muted">Staff Portal</span>
+            <span class="breadcrumb-sep" aria-hidden="true">/</span>
+            <span id="topbar-active-branch" class="topbar-branch-title">All Enclaves</span>
+          </div>
+
+          <div class="topbar-actions">
+            <span id="sync-feedback" class="sync-feedback" role="status" aria-live="polite">
+              Live Queue
+            </span>
+            <button type="button" id="refresh-ledger-btn" class="btn-atelier-outline btn-sm">
+              Refresh Data
+            </button>
+          </div>
+        </header>
+
+        <!-- Main Scrollable Content -->
+        <div class="workspace-content">
+          <!-- A. Live KPI Overview Cards -->
+          <section aria-labelledby="kpi-heading" class="section-block">
+            <h2 id="kpi-heading" class="sr-only">Live Operations Overview</h2>
+
+            <div class="kpi-grid">
+              <!-- KPI 1: Today's Revenue -->
+              <article class="surface-card kpi-card">
+                <span class="label-tracked text-muted">Today's Revenue</span>
+                <div id="kpi-revenue" class="font-display kpi-value tabular-nums">Rs. 0</div>
+                <p id="kpi-revenue-sub" class="kpi-caption">Across active evening service</p>
+              </article>
+
+              <!-- KPI 2: Active Orders -->
+              <article class="surface-card kpi-card">
+                <span class="label-tracked text-muted">Active Orders</span>
+                <div id="kpi-active-orders" class="font-display kpi-value tabular-nums">0 Orders Pending</div>
+                <p id="kpi-orders-sub" class="kpi-caption">Pending, preparing, or in transit</p>
+              </article>
+
+              <!-- KPI 3: Selected Branch Status -->
+              <article class="surface-card kpi-card">
+                <label for="branch-filter" class="label-tracked text-muted">Selected Branch Status</label>
+                <div class="branch-select-wrap">
+                  <select id="branch-filter" class="branch-select">
+                    <option value="all">All Karachi Enclaves</option>
+                    <option value="Clifton">Clifton — Block 4 Atelier</option>
+                    <option value="DHA Phase 6">DHA Phase 6 — Bukhari Pavilion</option>
+                    <option value="Tariq Road">Tariq Road — 1984 Heritage Vault</option>
+                  </select>
+                </div>
+                <p id="kpi-branch-sub" class="kpi-caption">Kitchen capacity nominal · Valet open</p>
+              </article>
+            </div>
+          </section>
+
+          <!-- B. Active Orders Management Table -->
+          <section id="section-orders" aria-labelledby="orders-heading" class="section-block">
+            <div class="section-header">
+              <div>
+                <span class="label-tracked text-gold">Live Dispatch Queue</span>
+                <h2 id="orders-heading" class="font-display section-title">
+                  Active Orders Management
+                </h2>
+              </div>
+
+              <div class="table-controls">
+                <input
+                  id="order-search"
+                  type="search"
+                  placeholder="Search ID, customer, or phone..."
+                  aria-label="Search orders"
+                  class="search-input"
+                />
+                <div class="status-filter-tabs" role="tablist" aria-label="Filter orders by status">
+                  <button type="button" class="filter-tab is-active" data-status-filter="all">All</button>
+                  <button type="button" class="filter-tab" data-status-filter="Pending">Pending</button>
+                  <button type="button" class="filter-tab" data-status-filter="Preparing">Preparing</button>
+                  <button type="button" class="filter-tab" data-status-filter="Out for Delivery">Dispatch</button>
+                  <button type="button" class="filter-tab" data-status-filter="Completed">Completed</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="surface-card table-container">
+              <table class="orders-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Order ID</th>
+                    <th scope="col">Customer &amp; Phone</th>
+                    <th scope="col">Branch</th>
+                    <th scope="col">Items Summary</th>
+                    <th scope="col" class="text-right">Total (PKR)</th>
+                    <th scope="col">Status</th>
+                  </tr>
+                </thead>
+                <tbody id="orders-table-body">
+                  <!-- Populated dynamically by admin.js -->
+                </tbody>
+              </table>
+
+              <div id="orders-empty-state" class="empty-state is-hidden">
+                <p class="font-display empty-title">No Orders Match Current Filters</p>
+                <p class="empty-copy">
+                  Switch branch or status filter to view incoming kitchen dispatches.
+                </p>
+                <button type="button" id="clear-order-filters" class="btn-atelier-outline btn-sm">
+                  Show All Orders
+                </button>
+              </div>
+            </div>
+          </section>
+
+          <!-- C. Menu Stock & Item Toggles -->
+          <section id="section-inventory" aria-labelledby="inventory-heading" class="section-block">
+            <div class="section-header">
+              <div>
+                <span class="label-tracked text-gold">Kitchen Inventory Control</span>
+                <h2 id="inventory-heading" class="font-display section-title">
+                  Menu Stock &amp; Price Ledger
+                </h2>
+              </div>
+
+              <div class="status-filter-tabs" role="tablist" aria-label="Filter menu by category">
+                <button type="button" class="cat-tab is-active" data-category-filter="All">All</button>
+                <button type="button" class="cat-tab" data-category-filter="Heirloom Mains">Heirloom Mains</button>
+                <button type="button" class="cat-tab" data-category-filter="BBQ">BBQ</button>
+                <button type="button" class="cat-tab" data-category-filter="Biryani">Biryani</button>
+                <button type="button" class="cat-tab" data-category-filter="Desserts &amp; Chai">Desserts &amp; Chai</button>
+              </div>
+            </div>
+
+            <div id="menu-inventory-list" class="inventory-grid">
+              <!-- Populated dynamically by admin.js -->
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+
+    <script src="/admin.js"></script>
+  </body>
+</html>
