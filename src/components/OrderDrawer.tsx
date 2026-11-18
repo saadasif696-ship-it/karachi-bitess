@@ -39,7 +39,7 @@ export function OrderDrawer({
   onRemoveItem,
   onClearOrder,
 }: OrderDrawerProps) {
-  const { user, idToken, myOrders, signInWithGoogle, signOutUser, refreshAccountData } = useAuth();
+  const { user, idToken, authError, myOrders, signInWithGoogle, signOutUser, refreshAccountData } = useAuth();
   const [fulfillment, setFulfillment] = useState<'delivery' | 'pickup'>('delivery');
   const [customerName, setCustomerName] = useState('');
   const [phone, setPhone] = useState('');
@@ -160,9 +160,9 @@ export function OrderDrawer({
         <div className="p-6 border-b border-[rgba(212,175,55,0.18)] flex items-center justify-between">
           <div>
             <p className="font-label text-[10px] font-semibold uppercase tracking-[0.14em] text-[#D4AF37]">
-              {branchInfo.shortLabel} Atelier Dispatch
+              {branchInfo.shortLabel} Home Delivery &amp; Pickup
             </p>
-            <h3 className="font-display text-2xl font-semibold text-[#F8F5F0]">Tasting Order</h3>
+            <h3 className="font-display text-2xl font-semibold text-[#F8F5F0]">Your Cart</h3>
           </div>
           <button
             type="button"
@@ -198,18 +198,27 @@ export function OrderDrawer({
             ) : (
               <>
                 <p className="text-[12px] text-[#A39E93]">
-                  Sign in with Google to submit &amp; track orders.
+                  Sign in with Google to confirm Home Delivery &amp; track orders.
                 </p>
                 <button
                   type="button"
-                  onClick={signInWithGoogle}
-                  className="btn-atelier-outline px-3 py-1.5 rounded font-label text-[10px] font-semibold uppercase tracking-[0.1em] shrink-0 cursor-pointer"
+                  onClick={() => signInWithGoogle()}
+                  className="btn-imperial-gold px-3.5 py-2 rounded font-label text-[10px] font-semibold uppercase tracking-[0.1em] shrink-0 cursor-pointer"
                 >
-                  Google Sign-In
+                  Sign in with Google
                 </button>
               </>
             )}
           </div>
+
+          {authError && (
+            <div
+              role="alert"
+              className="p-3 rounded bg-[#2A1215] border border-[rgba(255,180,171,0.35)] text-[12px] text-[#FFB4AB]"
+            >
+              {authError}
+            </div>
+          )}
 
           {confirmedOrder ? (
             <div className="space-y-5 py-2">
@@ -247,11 +256,21 @@ export function OrderDrawer({
               </button>
             </div>
           ) : items.length === 0 ? (
-            <div className="py-10 text-center space-y-3">
-              <p className="font-display text-xl text-[#F8F5F0]">Your Tasting Folio is Empty</p>
+            <div className="py-10 text-center space-y-4">
+              <p className="font-display text-xl text-[#F8F5F0]">Your Cart is Empty</p>
               <p className="text-[14px] text-[#A39E93] max-w-xs mx-auto">
-                Select heirloom mains, dum biryani, or charcoal hearth platters from the menu to assemble a private dispatch.
+                Click &ldquo;Add to Cart&rdquo; on any dish from the menu to place a Home Delivery or Self Pickup order.
               </p>
+              <button
+                type="button"
+                onClick={() => {
+                  onClose();
+                  document.querySelector('#menu')?.scrollIntoView({ behavior: 'smooth' });
+                }}
+                className="btn-imperial-gold font-label text-[11px] font-semibold uppercase tracking-[0.12em] px-5 py-2.5 rounded cursor-pointer"
+              >
+                Browse Menu for Home Delivery
+              </button>
             </div>
           ) : (
             <>
@@ -318,7 +337,7 @@ export function OrderDrawer({
                         : 'bg-[#0A0A0A] border border-[rgba(212,175,55,0.22)] text-[#A39E93]'
                     }`}
                   >
-                    White-Glove COD
+                    Home Delivery (COD)
                   </button>
                   <button
                     type="button"
@@ -329,7 +348,7 @@ export function OrderDrawer({
                         : 'bg-[#0A0A0A] border border-[rgba(212,175,55,0.22)] text-[#A39E93]'
                     }`}
                   >
-                    Valet Pickup
+                    Self Pickup
                   </button>
                 </div>
 
@@ -429,7 +448,11 @@ export function OrderDrawer({
               disabled={submitting}
               className="w-full btn-imperial-gold font-label text-[12px] font-semibold uppercase tracking-[0.12em] py-3.5 rounded cursor-pointer disabled:opacity-60"
             >
-              {submitting ? 'Confirming Order...' : 'Confirm Dispatch Order'}
+              {submitting
+                ? 'Confirming Order...'
+                : fulfillment === 'delivery'
+                  ? 'Place Home Delivery Order'
+                  : 'Place Pickup Order'}
             </button>
           </div>
         )}

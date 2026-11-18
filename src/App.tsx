@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
+import { ShoppingBag } from 'lucide-react';
 import type { BranchId, DishItem } from './data/atelierData';
 import { AuthProvider } from './context/AuthContext';
 import { Header } from './components/Header';
@@ -103,9 +104,18 @@ function StorefrontContent() {
     [orderItems]
   );
 
+  const cartSubtotal = useMemo(
+    () => orderItems.reduce((sum, line) => sum + line.dish.pricePkr * line.quantity, 0),
+    [orderItems]
+  );
+
   return (
     <div className="min-h-screen bg-[#0A0A0A] text-[#F8F5F0] flex flex-col">
-      <Header onReserveClick={() => scrollToSection('#reservations')} />
+      <Header
+        onReserveClick={() => scrollToSection('#reservations')}
+        orderItemCount={orderItemCount}
+        onOpenCart={() => setOrderDrawerOpen(true)}
+      />
 
       <main className="flex-1">
         <HeroSection
@@ -151,6 +161,24 @@ function StorefrontContent() {
         onRemoveItem={handleRemoveItem}
         onClearOrder={() => setOrderItems([])}
       />
+
+      {orderItemCount > 0 && !orderDrawerOpen && (
+        <div className="fixed bottom-5 right-5 z-40">
+          <button
+            type="button"
+            onClick={() => setOrderDrawerOpen(true)}
+            className="btn-imperial-gold flex items-center gap-3 px-5 py-3.5 rounded shadow-2xl border border-[rgba(243,229,171,0.45)] cursor-pointer"
+          >
+            <ShoppingBag className="w-4 h-4 shrink-0" />
+            <span className="font-label text-[11px] font-semibold uppercase tracking-[0.12em]">
+              Order Home Delivery ({orderItemCount})
+            </span>
+            <span className="font-display text-sm font-semibold tabular-nums border-l border-[#0A0A0A]/25 pl-3">
+              PKR {cartSubtotal.toLocaleString('en-PK')}
+            </span>
+          </button>
+        </div>
+      )}
     </div>
   );
 }

@@ -105,8 +105,19 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       await refreshAccountData(token);
       return token;
     } catch (error) {
-      const message =
+      const code = (error as { code?: string })?.code;
+      let message =
         error instanceof Error ? error.message : 'Unable to complete Google sign-in.';
+
+      if (code === 'auth/popup-blocked') {
+        message =
+          'Google Sign-In popup was blocked by your browser. Please allow popups for this site and try again.';
+      } else if (code === 'auth/popup-closed-by-user' || code === 'auth/cancelled-popup-request') {
+        message = 'Google Sign-In was closed before completing login. Please try again.';
+      } else if (code === 'auth/unauthorized-domain') {
+        message = `Domain "${window.location.hostname}" is not authorized in Firebase Authentication yet. Add it in Firebase Console → Authentication → Settings → Authorized domains.`;
+      }
+
       setAuthError(message);
       return null;
     }

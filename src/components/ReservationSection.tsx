@@ -1,5 +1,5 @@
 import { useEffect, useState, type FormEvent } from 'react';
-import { Calendar, CheckCircle2, Minus, Plus } from 'lucide-react';
+import { Calendar, CheckCircle2, LogIn, LogOut, Minus, Plus } from 'lucide-react';
 import { BRANCHES, type BranchId } from '../data/atelierData';
 import { useAuth } from '../context/AuthContext';
 
@@ -43,7 +43,7 @@ export function ReservationSection({
   preferredExperience,
   preferredSuiteNote,
 }: ReservationSectionProps) {
-  const { user, idToken, signInWithGoogle, refreshAccountData } = useAuth();
+  const { user, idToken, authError, signInWithGoogle, signOutUser, refreshAccountData } = useAuth();
   const [experience, setExperience] = useState<DiningExperience>(preferredExperience);
   const [date, setDate] = useState<string>(getTomorrowIsoDate);
   const [timeSlot, setTimeSlot] = useState<string>('20:30');
@@ -99,7 +99,7 @@ export function ReservationSection({
     if (!token) {
       token = await signInWithGoogle();
       if (!token) {
-        setErrorMessage('Please sign in with Google to confirm your reservation.');
+        setErrorMessage('Please sign in with Google using the button above to confirm your reservation.');
         return;
       }
     }
@@ -264,6 +264,47 @@ export function ReservationSection({
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6" noValidate>
+                {/* Google Account Bar */}
+                <div className="p-4 rounded bg-[#0A0A0A] border border-[rgba(212,175,55,0.22)] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                  {user ? (
+                    <>
+                      <div className="min-w-0">
+                        <p className="font-label text-[10px] font-semibold uppercase tracking-[0.12em] text-[#D4AF37]">
+                          Signed In with Google
+                        </p>
+                        <p className="text-[13px] text-[#F8F5F0] truncate mt-0.5">{user.email}</p>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={signOutUser}
+                        className="btn-atelier-outline inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded font-label text-[10px] font-semibold uppercase tracking-[0.1em] shrink-0 cursor-pointer"
+                      >
+                        <LogOut className="w-3.5 h-3.5" />
+                        <span>Sign Out</span>
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <div>
+                        <p className="font-label text-[10px] font-semibold uppercase tracking-[0.12em] text-[#D4AF37]">
+                          Guest Account Required
+                        </p>
+                        <p className="text-[13px] text-[#A39E93] mt-0.5">
+                          Sign in with Google to confirm and track your table reservation.
+                        </p>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => signInWithGoogle()}
+                        className="btn-imperial-gold inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded font-label text-[11px] font-semibold uppercase tracking-[0.1em] whitespace-nowrap shrink-0 cursor-pointer"
+                      >
+                        <LogIn className="w-3.5 h-3.5" />
+                        <span>Sign in with Google</span>
+                      </button>
+                    </>
+                  )}
+                </div>
+
                 {/* Branch Selection */}
                 <div>
                   <label className="block font-label text-[11px] font-semibold uppercase tracking-[0.12em] text-[#A39E93] mb-3">
@@ -447,24 +488,31 @@ export function ReservationSection({
                   />
                 </div>
 
-                {errorMessage && (
-                  <p role="alert" className="text-[13px] text-[#FFB4AB]">
-                    {errorMessage}
-                  </p>
+                {(authError || errorMessage) && (
+                  <div
+                    role="alert"
+                    className="p-3.5 rounded bg-[#2A1215] border border-[rgba(255,180,171,0.35)] text-[13px] text-[#FFB4AB]"
+                  >
+                    {authError || errorMessage}
+                  </div>
                 )}
 
                 <div className="pt-2 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                   <p className="text-[12px] text-[#A39E93]">
                     {user
                       ? `Booking as ${user.email}`
-                      : 'Sign in with Google upon confirmation · No deposit required.'}
+                      : 'Sign in with Google above or click below · No deposit required.'}
                   </p>
                   <button
                     type="submit"
                     disabled={submitting}
                     className="btn-imperial-gold font-label text-[12px] font-semibold uppercase tracking-[0.12em] px-8 py-3.5 rounded whitespace-nowrap shrink-0 cursor-pointer disabled:opacity-60"
                   >
-                    {submitting ? 'Confirming...' : 'Confirm Reservation'}
+                    {submitting
+                      ? 'Confirming...'
+                      : user
+                        ? 'Confirm Reservation'
+                        : 'Sign in & Confirm'}
                   </button>
                 </div>
               </form>

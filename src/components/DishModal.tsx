@@ -142,7 +142,7 @@ export function DishModal({ dish, onClose, onAddToOrder }: DishModalProps) {
               className="btn-imperial-gold font-label text-[11px] font-semibold uppercase tracking-[0.12em] px-6 py-2.5 rounded inline-flex items-center gap-2 cursor-pointer"
             >
               <Plus className="w-3.5 h-3.5" />
-              <span>Add to Tasting Order</span>
+              <span>Add to Cart</span>
             </button>
           </div>
         </div>

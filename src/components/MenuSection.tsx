@@ -165,7 +165,7 @@ export function MenuSection({
             className="btn-atelier-outline inline-flex items-center justify-center gap-2.5 px-5 py-2.5 rounded font-label text-[11px] font-semibold uppercase tracking-[0.12em] whitespace-nowrap shrink-0 cursor-pointer"
           >
             <ShoppingBag className="w-3.5 h-3.5 text-[#D4AF37]" />
-            <span>Tasting Order</span>
+            <span>View Cart</span>
             <span className="tabular-nums text-[#F3E5AB]">({orderItemCount})</span>
           </button>
         </div>
@@ -343,7 +343,7 @@ export function MenuSection({
                       ) : (
                         <>
                           <Plus className="w-3.5 h-3.5 text-[#D4AF37]" />
-                          <span>Add</span>
+                          <span>Add to Cart</span>
                         </>
                       )}
                     </button>
